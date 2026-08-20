@@ -10,7 +10,6 @@ class Test_System:
     @allure.title("健康检查")
     def test_health_check(self, client):
         """健康检查：访问根路径，期望返回 200 且 status=running"""
-        # 健康检查：访问根路径 "/"，期望返回 200 且 status=running
         resp = client.get("/")
         assert resp.status_code == 200
         data = resp.json()
@@ -19,7 +18,6 @@ class Test_System:
     @allure.title("数据库连通性检查")
     def test_db_connection_check(self, client):
         """数据库连通性检查：访问 /api/db-check，期望返回 200 且 status=ok"""
-        # 数据库连通性检查：访问 "/api/db-check"，期望返回 200 且 status=ok
         resp = client.get("/api/db-check")
         assert resp.status_code == 200
         data = resp.json()

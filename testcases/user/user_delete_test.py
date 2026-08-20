@@ -54,7 +54,6 @@ class Test_User_delete:
         # 校验异常响应中的实际状态码
         assert e.value.response.status_code == case["expected_status"]
 
-
     # 预期失败(xfail)用例：已知 BUG-002，删除有订单的用户应返回400而非500
     @pytest.mark.parametrize(
         'case',
