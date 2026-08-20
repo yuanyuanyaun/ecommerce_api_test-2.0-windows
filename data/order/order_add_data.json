@@ -1,0 +1,140 @@
+{
+  "success_cases": [
+    {
+      "name": "正常创建订单",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 201,
+      "expected_user_id": 6,
+      "expected_total_amount": 6999.0,
+      "expected_status_text": "待支付",
+      "expected_items_len": 1
+    }
+  ],
+  "fail_cases": [
+    {
+      "name": "用户不存在",
+      "payload": {
+        "user_id": 9999,
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 400
+    },
+    {
+      "name": "商品不存在",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 9999,
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 400
+    },
+    {
+      "name": "商品已下架",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 8,
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 400
+    },
+    {
+      "name": "库存不足",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": 9999
+          }
+        ]
+      },
+      "expected_status": 400
+    },
+    {
+      "name": "购买数量为0",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": 0
+          }
+        ]
+      },
+      "expected_status": 422
+    },
+    {
+      "name": "购买数量为负数",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": -1
+          }
+        ]
+      },
+      "expected_status": 422
+    },
+        {
+      "name": "用户id为空",
+      "payload": {
+
+        "items": [
+          {
+            "product_id": 2,
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 422
+    },
+        {
+      "name": "商品id为空",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+
+            "quantity": 1
+          }
+        ]
+      },
+      "expected_status": 422
+    },
+        {
+      "name": "购买数量为空",
+      "payload": {
+        "user_id": 1,
+        "items": [
+          {
+            "product_id": 2
+
+          }
+        ]
+      },
+      "expected_status": 422
+    }
+  ]
+}

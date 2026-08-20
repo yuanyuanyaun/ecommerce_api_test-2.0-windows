@@ -1,0 +1,12 @@
+# 被测系统（靶场）依赖
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+cryptography
+
+# 测试端依赖
+requests
+pytest
+allure-pytest
+pytest-html

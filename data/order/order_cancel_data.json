@@ -1,0 +1,43 @@
+{
+    "success_cases": [
+        {
+            "name": "待支付订单正常取消",
+            "order_id": 2,
+            "expected_status": 200,
+            "expected_order_status": "已取消",
+            "expected_user_id": 2,
+            "expected_total_amount": 599.0
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "取消不存在的订单",
+            "order_id": 9999,
+            "expected_status": 404
+        },
+        {
+            "name": "已支付订单无法取消",
+            "order_id": 1,
+            "expected_status": 400,
+            "expected_message": "当前订单状态为 '已支付'"
+        },
+        {
+            "name": "已完成订单无法取消",
+            "order_id": 3,
+            "expected_status": 400,
+            "expected_message": "当前订单状态为 '已完成'"
+        },
+        {
+            "name": "已取消订单无法取消",
+            "order_id": 4,
+            "expected_status": 400,
+            "expected_message": "当前订单状态为 '已取消'"
+        },
+        {
+            "name": "已发货订单无法取消",
+            "order_id": 5,
+            "expected_status": 400,
+            "expected_message": "当前订单状态为 '已发货'"
+        }
+    ]
+}

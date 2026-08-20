@@ -1,0 +1,24 @@
+{
+  "delete_success_cases": [
+    {
+      "name": "删除无订单用户",
+      "user_id": 3,
+      "expected_status": 200,
+      "expected_message": "删除成功"
+    }
+  ],
+  "delete_fail_cases": [
+    {
+      "name": "删除不存在的用户",
+      "user_id": 9999,
+      "expected_status": 404
+    }
+  ],
+  "delete_xfail_cases": [
+    {
+      "name": "删除有订单用户",
+      "user_id": 1,
+      "expected_status": 400
+    }
+  ]
+}

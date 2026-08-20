@@ -1,0 +1,38 @@
+{
+    "success_cases": [
+        {
+            "name": "添加顶级分类",
+            "payload": {"name": "农产品", "parent_id": 0},
+            "expected_status": 201
+        },
+        {
+            "name": "添加子分类",
+            "payload": {"name": "相机", "parent_id": 1},
+            "expected_status": 201
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "父分类不存在",
+            "payload": {"name": "水杯", "parent_id": 999},
+            "expected_status": 400
+        },
+        {
+            "name": "名称过长51位",
+            "payload": {"name": "123456789012345678901234567890123456789012345678901", "parent_id": 0},
+            "expected_status": 422
+        }
+    ],
+    "xfail_cases": [
+        {
+            "name": "名称为空字符串",
+            "payload": {"name": "", "parent_id": 0},
+            "expected_status": 422
+        },
+        {
+            "name": "名称为空格字符串",
+            "payload": {"name": " ", "parent_id": 0},
+            "expected_status": 422
+        }
+    ]
+}

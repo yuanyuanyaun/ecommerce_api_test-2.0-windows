@@ -1,0 +1,38 @@
+{
+    "success_cases": [
+        {
+            "name": "默认查询订单列表",
+            "params": {},
+            "expected_status": 200,
+            "expected_len": 5,
+            "expected_fields": ["id", "user_id", "total_amount", "status", "create_time", "items"]
+        },
+        {
+            "name": "按状态筛选已完成",
+            "params": {"status": "已完成"},
+            "expected_status": 200,
+            "expected_len": 1,
+            "expected_user_ids": [1]
+        },
+        {
+            "name": "按用户筛选user_id=1",
+            "params": {"user_id": 1},
+            "expected_status": 200,
+            "expected_len": 3,
+            "expected_user_ids": [1, 1, 1]
+        },
+        {
+            "name": "组合筛选已完成且user_id=1",
+            "params": {"status": "已完成", "user_id": 1},
+            "expected_status": 200,
+            "expected_len": 1,
+            "expected_user_ids": [1]
+        },
+        {
+            "name": "筛选无结果的组合",
+            "params": {"status": "已取消", "user_id": 1},
+            "expected_status": 200,
+            "expected_len": 0
+        }
+    ]
+}

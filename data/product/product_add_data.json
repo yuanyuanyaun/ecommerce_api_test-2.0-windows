@@ -1,0 +1,94 @@
+{
+    "success_cases": [
+        {
+            "name": "正常添加商品",
+            "payload": {
+                "name": "自动化测试商品001",
+                "price": 100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 201
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "名称过长51位",
+            "payload": {
+                "name": "123456789012345678901234567890123456789012345678901",
+                "price": 100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "名称为空字符串",
+            "payload": {
+                "name": "",
+                "price": 100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "名称为空格",
+            "payload": {
+                "name": " ",
+                "price": 100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "价格为负数",
+            "payload": {
+                "name": "负价格商品",
+                "price": -100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "库存为负数",
+            "payload": {
+                "name": "负库存商品",
+                "price": 100.00,
+                "stock": -1,
+                "status": "在售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "状态为非法值",
+            "payload": {
+                "name": "非法状态商品",
+                "price": 100.00,
+                "stock": 1,
+                "status": "热售",
+                "category_ids": [3]
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "关联不存在的分类ID",
+            "payload": {
+                "name": "错误分类商品",
+                "price": 100.00,
+                "stock": 1,
+                "status": "在售",
+                "category_ids": [999]
+            },
+            "expected_status": 400
+        }
+    ]
+}

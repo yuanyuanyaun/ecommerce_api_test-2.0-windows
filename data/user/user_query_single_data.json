@@ -1,0 +1,43 @@
+{
+    "query_single_success_cases": [
+        {
+            "name": "查询存在的用户",
+            "user_id": 1,
+            "expected_status": 200,
+            "expected_username": "zhangsan",
+            "expected_phone": "13800138001"
+        }
+    ],
+    "query_single_fail_cases": [
+        {
+            "name": "查询不存在的用户",
+            "user_id": 1234,
+            "expected_status": 404
+        },
+        {
+            "name": "id为负数",
+            "user_id": -1,
+            "expected_status": 404
+        },
+        {
+            "name": "id为0",
+            "user_id": 0,
+            "expected_status": 404
+        },
+        {
+            "name": "id为特殊符号@",
+            "user_id": "@",
+            "expected_status": 422
+        },
+        {
+            "name": "id为小数1.1",
+            "user_id": "1.1",
+            "expected_status": 422
+        },
+        {
+            "name": "id为空格",
+            "user_id": " ",
+            "expected_status": 422
+        }
+    ]
+}

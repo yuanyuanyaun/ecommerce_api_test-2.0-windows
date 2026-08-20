@@ -1,0 +1,47 @@
+{
+    "success_cases": [
+        {
+            "name": "删除无订单商品",
+            "product_id": 1,
+            "expected_status": 200,
+            "expected_message": "删除成功"
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "删除不存在的商品",
+            "product_id": 999,
+            "expected_status": 404
+        },
+        {
+            "name": "删除有已支付订单商品",
+            "product_id": 3,
+            "expected_status": 400
+        },
+        {
+            "name": "删除有待支付订单商品",
+            "product_id": 4,
+            "expected_status": 400
+        }
+    ],
+    "xfail_cases": [
+        {
+            "name": "删除有已完成订单商品",
+            "product_id": 5,
+            "expected_status": 200,
+            "bug_id": "BUG-005"
+        },
+        {
+            "name": "删除有已发货订单商品",
+            "product_id": 7,
+            "expected_status": 200,
+            "bug_id": "BUG-006"
+        },
+        {
+            "name": "删除有已取消订单商品",
+            "product_id": 6,
+            "expected_status": 200,
+            "bug_id": "BUG-007"
+        }
+    ]
+}

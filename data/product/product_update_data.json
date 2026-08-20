@@ -1,0 +1,72 @@
+{
+    "success_cases": [
+        {
+            "name": "只修改name字段",
+            "product_id": 1,
+            "update_payload": {
+                "name": "iPhone 15 Pro Max"
+            },
+            "expected_name": "iPhone 15 Pro Max",
+            "expected_price": 8999.0,
+            "expected_stock": 100,
+            "expected_status": "在售",
+            "expected_category_ids": [3],
+            "expected_status_code": 200
+        },
+        {
+            "name": "修改所有字段",
+            "product_id": 2,
+            "update_payload": {
+                "name": "华为Mate 60 Pro",
+                "price": 7999.0,
+                "stock": 50,
+                "status": "下架",
+                "category_ids": [1,3]
+            },
+            "expected_name": "华为Mate 60 Pro",
+            "expected_price": 7999.0,
+            "expected_stock": 50,
+            "expected_status": "下架",
+            "expected_category_ids": [1,3],
+            "expected_status_code": 200
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "修改不存在的商品",
+            "product_id": 999,
+            "update_payload": {"name": "不存在的商品"},
+            "expected_status_code": 404
+        },
+        {
+            "name": "名称过长51位",
+            "product_id": 1,
+            "update_payload": {"name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+            "expected_status_code": 422
+        },
+        {
+            "name": "价格为负数",
+            "product_id": 1,
+            "update_payload": {"price": -100.0},
+            "expected_status_code": 422
+        },
+        {
+            "name": "库存为负数",
+            "product_id": 1,
+            "update_payload": {"stock": -1},
+            "expected_status_code": 422
+        },
+        {
+            "name": "状态为非法值",
+            "product_id": 1,
+            "update_payload": {"status": "热售"},
+            "expected_status_code": 422
+        },
+        {
+            "name": "关联不存在的分类ID",
+            "product_id": 1,
+            "update_payload": {"category_ids": [999]},
+            "expected_status_code": 400
+        }
+    ]
+}

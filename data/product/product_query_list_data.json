@@ -1,0 +1,81 @@
+{
+    "success_cases": [
+        {
+            "name": "默认状态查询商品列表",
+            "params": {},
+            "expected_status": 200,
+            "expected_len":8,
+            "expected_fields": ["id", "name", "price", "stock", "status", "create_time", "categories"]
+        },
+        {
+            "name": "分页查询跳过第一条",
+            "params": {"skip": 1, "limit": 10},
+            "expected_status": 200,
+            "expected_len": 7,
+            "expected_fields": ["id", "name", "price", "stock", "status", "create_time", "categories"]
+        },
+        {
+            "name": "按分类查询category_id=3",
+            "params": {"skip": 0, "limit": 10, "category_id": 3},
+            "expected_status": 200,
+            "expected_len": 4,
+            "expected_fields": ["id", "name", "price", "stock", "status", "create_time", "categories"],
+            "expected_category_id": 3
+        },
+        {
+            "name": "limit为100时正常查询",
+            "params": {"skip": 0, "limit": 100},
+            "expected_status": 200,
+            "expected_len": 8
+        },
+        {
+            "name": "limit为1时正常查询",
+            "params": {"skip": 0, "limit": 1},
+            "expected_status": 200,
+            "expected_len": 1
+        },
+        {
+            "name": "分类关联不存在时返回空列表",
+            "params": {"skip": 0, "limit": 10, "category_id": 99},
+            "expected_status": 200,
+            "expected_len": 0
+        }
+    ],
+    "fail_cases": [
+        {
+            "name": "skip为负数",
+            "params": {"skip": -1, "limit": 10},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为负数",
+            "params": {"skip": 0, "limit": -1},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为0",
+            "params": {"skip": 0, "limit": 0},
+            "expected_status": 422
+        },
+        {
+            "name": "limit过大101",
+            "params": {"skip": 0, "limit": 101},
+            "expected_status": 422
+        },
+        {
+            "name": "skip为特殊符号@",
+            "params": {"skip": "@", "limit": 10},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为特殊符号@",
+            "params": {"skip": 0, "limit": "@"},
+            "expected_status": 422
+        },
+        {
+            "name": "category_id为特殊符号@",
+            "params": {"skip": 0, "limit": 10, "category_id": "@"},
+            "expected_status": 422
+        }
+    ]
+}

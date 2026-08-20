@@ -1,0 +1,158 @@
+{
+    "post_success_cases": [
+        {
+            "name": "正常添加用户",
+            "payload": {
+                "username": "ceshi001",
+                "password": "123456789",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "不填电话也能创建",
+            "payload": {
+                "username": "ceshi002",
+                "password": "123456789"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "密码刚好6位",
+            "payload": {
+                "username": "ceshi007",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "密码刚好20位",
+            "payload": {
+                "username": "ceshi008",
+                "password": "12345678901234567890",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "用户名刚好50位",
+            "payload": {
+                "username": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwx",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "电话20位",
+            "payload": {
+                "username": "ceshi009",
+                "password": "123456789",
+                "phone": "12345678901234567890"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "用户名为特殊符号",
+            "payload": {
+                "username": "@@@@@@@",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "密码为特殊符号",
+            "payload": {
+                "username": "ceshi010",
+                "password": "@@@@@@",
+                "phone": "12345678901"
+            },
+            "expected_status": 201
+        },
+        {
+            "name": "电话为特殊符号",
+            "payload": {
+                "username": "ceshi011",
+                "password": "123456",
+                "phone": "@@@@@@@"
+            },
+            "expected_status": 201
+        }
+    ],
+    "post_fail_cases": [
+        {
+            "name": "重复用户名",
+            "payload": {
+                "username": "ceshi001",
+                "password": "123456789",
+                "phone": "12345678901"
+            },
+            "expected_status": 400
+        },
+        {
+            "name": "用户名为空格",
+            "payload": {
+                "username": "   ",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "用户名为空字符串",
+            "payload": {
+                "username": "",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "用户名51位",
+            "payload": {
+                "username": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxy",
+                "password": "123456",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "密码为空",
+            "payload": {
+                "username": "ceshi_pwd_empty",
+                "password": "",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "密码5位",
+            "payload": {
+                "username": "ceshi_pwd_5",
+                "password": "12345",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "密码21位",
+            "payload": {
+                "username": "ceshi_pwd_21",
+                "password": "123456789012345678901",
+                "phone": "12345678901"
+            },
+            "expected_status": 422
+        },
+        {
+            "name": "电话21位",
+            "payload": {
+                "username": "ceshi_phone_21",
+                "password": "123456",
+                "phone": "123456789012345678901"
+            },
+            "expected_status": 422
+        }
+    ]
+}

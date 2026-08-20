@@ -1,0 +1,75 @@
+{
+    "query_success_cases": [
+        {
+            "name": "默认状态查询用户列表",
+            "params": {},
+            "expected_status": 200,
+            "expected_min_len": 3,
+            "expected_fields": ["id", "username", "phone", "create_time"]
+        },
+        {
+            "name": "分页查询跳过第一条",
+            "params": {"skip": 1, "limit": 10},
+            "expected_status": 200,
+            "expected_len": 2,
+            "expected_fields": ["id", "username", "phone", "create_time"]
+        },
+        {
+            "name": "limit为100时正常查询",
+            "params": {"skip": 0, "limit": 100},
+            "expected_status": 200,
+            "expected_min_len": 3,
+            "expected_fields": ["id", "username", "phone", "create_time"]
+        },
+        {
+            "name": "limit为1时正常查询",
+            "params": {"skip": 0, "limit": 1},
+            "expected_status": 200,
+            "expected_len": 1,
+            "expected_fields": ["id", "username", "phone", "create_time"]
+        },
+        {
+            "name": "skip跳过数据大于总量时返回空列表",
+            "params": {"skip": 100, "limit": 10},
+            "expected_status": 200,
+            "expected_len": 0
+        }
+    ],
+    "query_fail_cases": [
+        {
+            "name": "limit过大101",
+            "params": {"skip": 0, "limit": 101},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为0",
+            "params": {"skip": 0, "limit": 0},
+            "expected_status": 422
+        },
+        {
+            "name": "skip为负数",
+            "params": {"skip": -1, "limit": 10},
+            "expected_status": 422
+        },
+        {
+            "name": "skip为特殊符号@",
+            "params": {"skip": "@", "limit": 1},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为特殊符号@",
+            "params": {"skip": 0, "limit": "@"},
+            "expected_status": 422
+        },
+        {
+            "name": "skip为空格",
+            "params": {"skip": " ", "limit": 1},
+            "expected_status": 422
+        },
+        {
+            "name": "limit为空格",
+            "params": {"skip": 0, "limit": " "},
+            "expected_status": 422
+        }
+    ]
+}

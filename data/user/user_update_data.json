@@ -1,0 +1,69 @@
+{
+  "success_cases": [
+    {
+      "name": "只修改phone",
+      "user_id": 1,
+      "update_payload": {
+        "phone": "13900000001"
+      },
+      "expected_username": "zhangsan",
+      "expected_phone": "13900000001"
+    },
+    {
+      "name": "修改所有字段",
+      "user_id": 2,
+      "update_payload": {
+        "username": "lisi_new",
+        "password": "654321",
+        "phone": "13900000002"
+      },
+      "expected_username": "lisi_new",
+      "expected_phone": "13900000002"
+    },
+    {
+      "name": "修改为自己的当前用户名",
+      "user_id": 3,
+      "update_payload": {
+        "username": "wangwu"
+      },
+      "expected_username": "wangwu",
+      "expected_phone": "13800138003"
+    }
+  ],
+  "fail_cases": [
+    {
+      "name": "修改不存在的用户",
+      "user_id": 9999,
+      "update_payload": {
+        "phone": "13900000000"
+      },
+      "expected_status": 404
+    },
+    {
+      "name": "用户名重复",
+      "user_id": 2,
+      "update_payload": {
+        "username": "zhangsan"
+      },
+      "expected_status": 400
+    },
+    {
+      "name": "密码5位",
+      "user_id": 1,
+      "update_payload": {
+        "password": "12345"
+      },
+      "expected_status": 422
+    }
+  ],
+  "xfail_cases": [
+    {
+      "name": "用户名改为空格",
+      "user_id": 3,
+      "update_payload": {
+        "username": " "
+      },
+      "expected_status": 422
+    }
+  ]
+}
